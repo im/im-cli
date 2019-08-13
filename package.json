@@ -1,24 +1,24 @@
 {
-    "name": "postline-cli",
+    "name": "im-cli",
     "version": "1.0.2",
     "description": "",
     "main": "index.js",
     "scripts": {
-        "postline": "bin/postline"
+        "im": "bin/im"
     },
     "repository": {
         "type": "git",
-        "url": "git+https://github.com/im/postline-cli.git"
+        "url": "git+https://github.com/im/im-cli.git"
     },
     "bin": {
-        "postline": "bin/postline"
+        "im": "bin/im"
     },
     "author": "",
     "license": "ISC",
     "bugs": {
-        "url": "https://github.com/im/postline-cli/issues"
+        "url": "https://github.com/im/im-cli/issues"
     },
-    "homepage": "https://github.com/im/postline-cli#readme",
+    "homepage": "https://github.com/im/im-cli#readme",
     "dependencies": {
         "chalk": "^2.4.2",
         "commander": "^3.0.0",

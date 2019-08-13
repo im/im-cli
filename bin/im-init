@@ -18,6 +18,6 @@ checkVersion(() => {
 
 function init() {
     //本地模板存放仓库
-    const tmpRepo = path.resolve(userHome, '.postline-templates')
+    const tmpRepo = path.resolve(userHome, '.im-templates')
     console.log('tmpRepo: ', tmpRepo);
 }
