@@ -1,0 +1,37 @@
+{
+    "name": "postline-cli",
+    "version": "1.0.1",
+    "description": "",
+    "main": "index.js",
+    "scripts": {
+        "postline": "bin/postline"
+    },
+    "repository": {
+        "type": "git",
+        "url": "git+https://github.com/im/postline-cli.git"
+    },
+    "bin": {
+        "postline": "bin/postline"
+    },
+    "author": "",
+    "license": "ISC",
+    "bugs": {
+        "url": "https://github.com/im/postline-cli/issues"
+    },
+    "homepage": "https://github.com/im/postline-cli#readme",
+    "dependencies": {
+        "chalk": "^2.4.2",
+        "commander": "^3.0.0",
+        "download-git-repo": "^2.0.0",
+        "inquirer": "^6.5.1",
+        "ora": "^3.4.0",
+        "org": "^0.2.0",
+        "request": "^2.88.0",
+        "rimraf": "^2.6.3",
+        "semver": "^6.3.0",
+        "user-home": "^2.0.0"
+    },
+    "engines": {
+        "node": ">=10.0.0"
+    }
+}

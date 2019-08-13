@@ -1,0 +1,21 @@
+#!/usr/bin/env node
+// 增加这一行是为了指定用node执行脚本文件。
+
+const program = require('commander') // node.js命令行界面的完整解决方案
+
+// console.log('.version: ', require('../package').version);
+program
+    .version(require('../package').version, '-v, --version')
+    .usage('<command> [options]')
+    .command('init', 'generate a new project from a template')
+    .command('new', 'new page')
+
+// process.argv.forEach((val, index) => {
+//     console.log(`${index}: ${val}`);
+// });
+
+// process.argv [path, path]
+// 第一个值 process.execPath  启动Node.js进程的可执行文件的绝对路径名
+// 第一二值 process.execPath  正在执行的JavaScript文件的路径
+
+program.parse(process.argv)

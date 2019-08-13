@@ -1,0 +1,23 @@
+#!/usr/bin/env node
+
+const path = require('path')
+const userHome = require('user-home')
+console.log('userHome: ', userHome);
+const exists = require('fs').existsSync
+const inquirer = require('inquirer')
+const download = require('download-git-repo')
+const chalk = require('chalk')
+const ora = require('ora')
+const rm = require('rimraf').sync
+const checkVersion = require('../lib/check-version.js')
+
+checkVersion(() => {
+    init()
+})
+
+
+function init() {
+    //本地模板存放仓库
+    const tmpRepo = path.resolve(userHome, '.postline-templates')
+    console.log('tmpRepo: ', tmpRepo);
+}
