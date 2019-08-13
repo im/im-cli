@@ -1,1 +1,1 @@
-# postline-cli
+# im-cli
