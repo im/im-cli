@@ -25,6 +25,7 @@
         "download-git-repo": "^2.0.0",
         "inquirer": "^6.5.1",
         "markdown-it": "^9.1.0",
+        "metalsmith": "^2.3.0",
         "ora": "^3.4.0",
         "org": "^0.2.0",
         "request": "^2.88.0",

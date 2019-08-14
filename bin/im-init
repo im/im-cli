@@ -8,16 +8,16 @@ const download = require('download-git-repo')
 const chalk = require('chalk')
 const ora = require('ora')
 const rm = require('rimraf').sync
-const checkVersion = require('../lib/check-version.js')
-const fetchTemplateList = require('../lib/fetch-template-list.js')
+const checkVersion = require('../lib/check-version.js') // 校验版本
+const fetchTemplateList = require('../lib/fetch-template-list.js') // 获取模板
+const generate = require('../lib/generate-project')
 
 checkVersion(() => {
     init()
 })
 
 function init() {
-    // 
-    const tmpRepo = path.resolve(userHome, '.im-templates')
+    const tmpRepo = path.resolve(userHome, '.im-templates') // 模板缓存路径
     fetchTemplateList((templateList) => {
         const choices = templateList.map(template => {
             return {
@@ -25,7 +25,6 @@ function init() {
                 value: template.name
             }
         })
-        // console.log('choices: ', choices);
         inquirer.prompt([{
             type: 'list',
             name: 'template',
@@ -47,7 +46,7 @@ function init() {
                         rm(tmpDest)
                         downloadAndGenerate(tmpRepo, tmpName, tmpUrl)
                     } else {
-                        generate(tmpDest)
+                        generate(tmpDest, tmpName)
                     }
                 });
             } else {
@@ -58,26 +57,19 @@ function init() {
 }
 
 
-function downloadAndGenerate (tmpRepo, tmpName, tmpUrl) {
+function downloadAndGenerate(tmpRepo, tmpName, tmpUrl) {
     const spinner = ora('downloading template...')
     const tmpDest = path.join(tmpRepo, tmpName)
-    // inquirer.prompt([{
-    //     type: 'input',
-    //     name: 'branch',
-    //     message: `the name of branch you need in ${tmpName}`,
-    //     default: 'master'
-    // }]).then(answer => {
-    //     spinner.start()
-        download(`${tmpUrl}`, tmpDest, {
-            clone: false
-        }, (err) => {
-            if (err) {
-                spinner.fail(chalk.red('download template unsuccessfully'))
-                console.log(err)
-            } else {
-                spinner.succeed(chalk.green('download template successfully'))
-                // generate(tmpDest)
-            }
-        })
-    // })
+    download(`${tmpUrl}`, tmpDest, { // 下载模板
+        clone: false
+    }, (err) => {
+        
+        if (err) {
+            spinner.fail(chalk.red('download template unsuccessfully'))
+            console.log(err)
+        } else {
+            spinner.succeed(chalk.green('download template successfully'))
+            generate(tmpDest, tmpName)
+        }
+    })
 }
