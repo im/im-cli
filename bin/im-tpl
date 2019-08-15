@@ -29,7 +29,7 @@ function init() {
             type: 'list',
             name: 'template',
             choices,
-            message: 'Choose template you want'
+            message: '选择模板'
         }]).then(answer => {
             const tmpName = answer.template
             const tmpDest = path.join(tmpRepo, tmpName)
@@ -39,7 +39,7 @@ function init() {
                     {
                         type: 'confirm',
                         name: 'override',
-                        message: 'The template exists.Override?'
+                        message: '是否覆盖当前模板?'
                     }
                 ]).then(answer => {
                     if (answer.override) {
@@ -58,17 +58,17 @@ function init() {
 
 
 function downloadAndGenerate(tmpRepo, tmpName, tmpUrl) {
-    const spinner = ora('downloading template...')
+    const spinner = ora('开始下载模板...')
     const tmpDest = path.join(tmpRepo, tmpName)
     download(`${tmpUrl}`, tmpDest, { // 下载模板
         clone: false
     }, (err) => {
         
         if (err) {
-            spinner.fail(chalk.red('download template unsuccessfully'))
+            spinner.fail(chalk.red('下载模板失败'))
             console.log(err)
         } else {
-            spinner.succeed(chalk.green('download template successfully'))
+            spinner.succeed(chalk.green('下载模板成功'))
             generate(tmpDest, tmpName)
         }
     })
