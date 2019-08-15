@@ -1,0 +1,94 @@
+#!/usr/bin/env node
+const chalk = require('chalk')
+const http = require('http')
+const fs = require('fs')
+const path = require('path')
+const url = require('url')
+const inquirer = require('inquirer')
+const open = require('opn')
+const portIsOccupied = require('../lib/port-is-occupied')
+
+
+portIsOccupied(8080).then(port => {
+    createServer(port)
+})
+
+function openBrowser(serveUrl) {
+    const indexUrl = path.join(process.cwd(), 'index.html')
+    if (fs.existsSync(indexUrl)) {
+        inquirer.prompt([
+            {
+                type: 'confirm',
+                name: 'open',
+                message: '是否在浏览器打开',
+                default: true
+            }
+        ]).then(answer => {
+            if (answer.open) {
+                open(serveUrl)
+            }
+        });
+    }
+}
+
+var mine = {
+    "css": "text/css",
+    "gif": "image/gif",
+    "html": "text/html",
+    "ico": "image/x-icon",
+    "jpeg": "image/jpeg",
+    "jpg": "image/jpeg",
+    "js": "text/javascript",
+    "json": "application/json",
+    "pdf": "application/pdf",
+    "png": "image/png",
+    "svg": "image/svg+xml",
+    "swf": "application/x-shockwave-flash",
+    "tiff": "image/tiff",
+    "txt": "text/plain",
+    "wav": "audio/x-wav",
+    "wma": "audio/x-ms-wma",
+    "wmv": "video/x-ms-wmv",
+    "xml": "text/xml"
+}
+
+function createServer(port) {
+    http.createServer(function (req, res) {
+        var pathname = url.parse(req.url).pathname,//获取url中的文件名
+            pathname = (pathname !== "/" && pathname) ? pathname : "/index.html"
+        var realPath = path.join("./", path.normalize(pathname.replace(/\.\./g, ""))),
+            ext = path.extname(realPath)
+        ext = ext ? ext.slice(1) : 'unknown'//获取文件扩展名
+
+        //查找文件
+        fs.exists(realPath, function (exists) {
+            if (!exists) {//处理404
+                res.writeHead(404, {
+                    'Content-Type': 'text/plain'
+                })
+                res.write("This request URL " + pathname + " was not found on this server.")
+                res.end()
+            } else {//读取文件
+                fs.readFile(realPath, "binary", function (err, file) {
+                    if (err) {//程序出错报500错误
+                        res.writeHead(500, {
+                            'Content-Type': 'text/plain'
+                        })
+                        res.end(err)
+                    } else {
+                        var contentType = mine[ext] || "text/plain"
+                        res.writeHead(200, {
+                            'Content-Type': contentType
+                        })
+                        res.write(file, "binary")
+                        res.end()
+                    }
+                })
+            }
+        })
+    }).listen(port, function () {
+        const serveUrl = `http://127.0.0.1:${port}/`
+        console.log(chalk.green(`服务已启动  ${serveUrl}`))
+        openBrowser(serveUrl)
+    })
+}

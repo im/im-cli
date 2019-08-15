@@ -2,12 +2,27 @@
 // 增加这一行是为了指定用node执行脚本文件。
 
 const program = require('commander') // node.js命令行界面的完整解决方案
+const chalk = require('chalk')
 
-// console.log('.version: ', require('../package').version);
+console.log()
+console.log(`############################################`)
+console.log(`#                                          #`)
+console.log(`#         ##     ###############           #`)
+console.log(`#        ##     ##     ##    ##            #`)
+console.log(`#       ##     ##     ##    ##             #`)
+console.log(`#      ##     ##     ##    ##              #`)
+console.log(`#      ##     ##     ##    ##              #`)
+console.log(`#                                          #`)
+console.log(`############################################`)
+console.log()
+
+
 program
     .version(require('../package').version, '-v, --version')
     .usage('<command> [options]')
-    .command('init', 'generate a new project from a template')
+    // .command('init', 'generate a new project from a template')
+    .command('tpl', chalk.green('创建模板'))
+    .command('serve', chalk.green('启动本地服务'))
 
 // process.argv.forEach((val, index) => {
 //     console.log(`${index}: ${val}`);
