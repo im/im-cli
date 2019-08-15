@@ -8,9 +8,9 @@ const download = require('download-git-repo')
 const chalk = require('chalk')
 const ora = require('ora')
 const rm = require('rimraf').sync
-const checkVersion = require('../lib/check-version.js') // 校验版本
-const fetchTemplateList = require('../lib/fetch-template-list.js') // 获取模板
-const generate = require('../lib/generate-project')
+const checkVersion = require('../lib/checkVersion') // 校验版本
+const fetchTemplateList = require('../lib/fetchTemplateList') // 获取模板
+const generate = require('../lib/generate')
 
 checkVersion(() => {
     init()
