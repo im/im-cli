@@ -1,4 +1,5 @@
 #!/usr/bin/env node
+
 const chalk = require('chalk')
 const http = require('http')
 const fs = require('fs')
@@ -7,7 +8,6 @@ const url = require('url')
 const inquirer = require('inquirer')
 const open = require('opn')
 const portIsOccupied = require('../lib/portIsOccupied')
-
 
 // 校验端口是否被占用
 portIsOccupied(8080).then(port => {
@@ -34,7 +34,7 @@ function openBrowser(serveUrl) {
 }
 
 // 支持的文件类型
-var mine = {
+const mine = {
     "css": "text/css",
     "gif": "image/gif",
     "html": "text/html",
@@ -57,9 +57,9 @@ var mine = {
 
 function createServer(port) {
     http.createServer(function (req, res) {
-        var pathname = url.parse(req.url).pathname,//获取url中的文件名
+        const pathname = url.parse(req.url).pathname,//获取url中的文件名
             pathname = (pathname !== "/" && pathname) ? pathname : "/index.html"
-        var realPath = path.join("./", path.normalize(pathname.replace(/\.\./g, ""))),
+        const realPath = path.join("./", path.normalize(pathname.replace(/\.\./g, ""))),
             ext = path.extname(realPath)
         ext = ext ? ext.slice(1) : 'unknown'//获取文件扩展名
 
@@ -79,7 +79,7 @@ function createServer(port) {
                         })
                         res.end(err)
                     } else {
-                        var contentType = (mine[ext] || "text/plain") + ';charset=utf-8'
+                        const contentType = (mine[ext] || "text/plain") + ';charset=utf-8'
                         res.writeHead(200, {
                             'Content-Type': contentType
                         })

@@ -4,18 +4,17 @@
 const program = require('commander') // node.js命令行界面的完整解决方案
 const chalk = require('chalk')
 
-console.log()
-console.log(`############################################`)
-console.log(`#                                          #`)
-console.log(`#         ##     ###############           #`)
-console.log(`#         ##     ##     ##    ##           #`)
-console.log(`#         ##     ##     ##    ##           #`)
-console.log(`#         ##     ##     ##    ##           #`)
-console.log(`#         ##     ##     ##    ##           #`)
-console.log(`#                                          #`)
-console.log(`############################################`)
-console.log()
-
+// console.log()
+// console.log(`############################################`)
+// console.log(`#                                          #`)
+// console.log(`#         ##     ###############           #`)
+// console.log(`#         ##     ##     ##    ##           #`)
+// console.log(`#         ##     ##     ##    ##           #`)
+// console.log(`#         ##     ##     ##    ##           #`)
+// console.log(`#         ##     ##     ##    ##           #`)
+// console.log(`#                                          #`)
+// console.log(`############################################`)
+// console.log()
 
 program
     .version(require('../package').version, '-v, --version')
