@@ -6,7 +6,7 @@ const fs = require('fs')
 const path = require('path')
 const url = require('url')
 const inquirer = require('inquirer')
-const open = require('opn')
+const open = require('open')
 const portIsOccupied = require('../lib/portIsOccupied')
 
 // 校验端口是否被占用
@@ -57,9 +57,9 @@ const mine = {
 
 function createServer(port) {
     http.createServer(function (req, res) {
-        const pathname = url.parse(req.url).pathname,//获取url中的文件名
+        var pathname = url.parse(req.url).pathname,//获取url中的文件名
             pathname = (pathname !== "/" && pathname) ? pathname : "/index.html"
-        const realPath = path.join("./", path.normalize(pathname.replace(/\.\./g, ""))),
+        var realPath = path.join("./", path.normalize(pathname.replace(/\.\./g, ""))),
             ext = path.extname(realPath)
         ext = ext ? ext.slice(1) : 'unknown'//获取文件扩展名
 
