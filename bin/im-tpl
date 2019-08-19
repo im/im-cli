@@ -29,26 +29,27 @@ function init() {
             type: 'list',
             name: 'template',
             choices,
-            message: '选择模板'
+            message: '请选择需要创建的模板'
         }]).then(answer => {
             const tmpName = answer.template
             const tmpDest = path.join(tmpRepo, tmpName)
             const tmpUrl = templateList.find(template => template.name === tmpName).url
             if (exists(tmpDest)) { // 判断本地缓存是否有模板
-                inquirer.prompt([
-                    {
-                        type: 'confirm',
-                        name: 'override',
-                        message: '是否覆盖当前模板?'
-                    }
-                ]).then(answer => {
-                    if (answer.override) {
-                        rm(tmpDest)
-                        downloadAndGenerate(tmpRepo, tmpName, tmpUrl)
-                    } else {
-                        generate(tmpDest, tmpName)
-                    }
-                });
+                // inquirer.prompt([
+                //     {
+                //         type: 'confirm',
+                //         name: 'override',
+                //         message: chalk.red('是否覆盖当前缓存中的模板?')
+                //     }
+                // ]).then(answer => {
+                //     if (answer.override) {
+                //         rm(tmpDest)
+                //         downloadAndGenerate(tmpRepo, tmpName, tmpUrl)
+                //     } else {
+                //         generate(tmpDest, tmpName)
+                //     }
+                // });
+                generate(tmpDest, tmpName)
             } else {
                 downloadAndGenerate(tmpRepo, tmpName, tmpUrl)
             }
@@ -63,7 +64,6 @@ function downloadAndGenerate(tmpRepo, tmpName, tmpUrl) {
     download(`${tmpUrl}`, tmpDest, { // 下载模板
         clone: false
     }, (err) => {
-        
         if (err) {
             spinner.fail(chalk.red('下载模板失败'))
             console.log(err)
