@@ -13,7 +13,7 @@
     "bin": {
         "im": "bin/im"
     },
-    "author": "",
+    "author": "im",
     "license": "ISC",
     "bugs": {
         "url": "https://github.com/im/im-cli/issues"
@@ -24,7 +24,6 @@
         "commander": "^3.0.0",
         "download-git-repo": "^2.0.0",
         "inquirer": "^6.5.1",
-        "metalsmith": "^2.3.0",
         "moment": "^2.24.0",
         "opn": "^6.0.0",
         "ora": "^3.4.0",
