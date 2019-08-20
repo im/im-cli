@@ -91,7 +91,23 @@ function createServer(port) {
         })
     }).listen(port, function () {
         const serveUrl = `http://127.0.0.1:${port}/`
-        console.log(chalk.green(`服务已启动  ${serveUrl}`))
+        console.log(chalk.green(`服务已启动`))
+        console.log('   ' + chalk.green.underline(`http://localhost:${port}`))
+        console.log('   ' + chalk.green.underline(`http://127.0.0.1:${port}`))
+        console.log('   ' + chalk.green.underline(`http://${getIPAdress()}:${port}`))
         openBrowser(serveUrl)
     })
+}
+
+function getIPAdress() {
+    var interfaces = require('os').networkInterfaces();
+    for (var devName in interfaces) {
+        var iface = interfaces[devName];
+        for (var i = 0; i < iface.length; i++) {
+            var alias = iface[i];
+            if (alias.family === 'IPv4' && alias.address !== '127.0.0.1' && !alias.internal) {
+                return alias.address;
+            }
+        }
+    }
 }
