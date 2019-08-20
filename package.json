@@ -1,6 +1,6 @@
 {
     "name": "im-cli",
-    "version": "1.0.11",
+    "version": "1.0.12",
     "description": "命令行工具",
     "main": "index.js",
     "scripts": {
