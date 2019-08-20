@@ -1,7 +1,7 @@
 {
     "name": "im-cli",
     "version": "1.0.11",
-    "description": "",
+    "description": "命令行工具",
     "main": "index.js",
     "scripts": {
         "im": "bin/im"
